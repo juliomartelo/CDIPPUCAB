@@ -1,6 +1,12 @@
 package inventario;
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * @author Julio C. Martelo
@@ -10,6 +16,7 @@ public class Inventario {
     
     public static void main(String[] args) {
         menu();
+        lpe();
         // TODO code application logic here
     }
     
@@ -28,8 +35,29 @@ public class Inventario {
     }
     
     public static void lpe(){ // LISTA PRODUCTOS DE LA EMPRESA
-        // ESTA FUNCION MOSTRARÁ UN LISTADO DE PRODUCTOS CON
-        // LA SIGUIENTE ESTRUCUTRA <CODPRODUCTO>-<CANDIDAD>
+        File file = new File("C:\\Users\\Julio\\Documents\\GitHub\\CDIPPUCAB\\Procesos\\Archivos\\archivo1.txt");
+        System.out.println(file.exists()); // Verifica si existe el archivo
+        if (!file.exists()){  // Verifica si existe el archivo
+            try{
+                file.createNewFile();
+                System.out.println(file.getName()+ " ha sido creado");
+            }catch(IOException ex){ ex.printStackTrace();}
+        }
+        try {
+            FileReader entrada=new FileReader("C:\\Users\\Julio\\Documents\\GitHub\\CDIPPUCAB\\Procesos\\Archivos\\archivo1.txt");
+            int c =  entrada.read();
+            if (c != -1){
+                System.out.print((char)c);
+                while(c != -1){
+                    c=entrada.read();
+                    char letra=(char)c;
+                    System.out.print(letra);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public static void cpe(){ // CARGAR PRODUCTOS DE LA EMPRESA
@@ -42,5 +70,33 @@ public class Inventario {
     public static void adpe(){ //ACTUALIZAR DISPONIBILIDAD DE PRODUCTOS
     
     }
+    
+/*   public static void archivos(){
+        File file = new File("C:\\Users\\Julio\\Documents\\GitHub\\CDIPPUCAB\\Procesos\\Archivos\\archivo1.txt");
+        System.out.println(file.exists()); // Verifica si existe el archivo
+        if (!file.exists()){  // Verifica si existe el archivo
+            try{
+                file.createNewFile();
+                System.out.println(file.getName()+ " ha sido creado");
+            }catch(IOException ex){ ex.printStackTrace();}
+        }
+    }*/
+    
+/* public static void leerarchivo(){
+        try {
+            FileReader entrada=new FileReader("C:\\Users\\Julio\\Documents\\GitHub\\CDIPPUCAB\\Procesos\\Archivos\\archivo1.txt");
+            int c =  entrada.read();
+            if (c != -1){
+                System.out.print((char)c);
+                while(c != -1){
+                    c=entrada.read();
+                    char letra=(char)c;
+                    System.out.print(letra);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } */
     
 }
